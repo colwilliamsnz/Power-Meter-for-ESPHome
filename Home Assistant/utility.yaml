@@ -1,0 +1,12 @@
+utility_meter:
+  energy_used_hourly:
+    source: sensor.energy_spent
+    cycle: hourly
+
+  energy_used_daily:
+    source: sensor.energy_spent
+    cycle: daily
+
+  energy_used_weekly:
+    source: sensor.energy_spent
+    cycle: weekly

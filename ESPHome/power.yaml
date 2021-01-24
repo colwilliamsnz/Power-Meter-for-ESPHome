@@ -1,0 +1,56 @@
+esphome:
+  name: power
+  platform: ESP8266
+  board: d1_mini
+
+substitutions:
+  <<: !include secrets.yaml
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_pass
+
+# Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Power Fallback Hotspot"
+    password: !secret fallback_hotspot
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: !secret hass_api
+
+ota:
+  password: !secret hass_ota
+
+# Restart daily at 0:00 (midnight) because the ESP8266 regularly becomes
+# unresponsive after a few days
+time:
+  - platform: homeassistant
+    on_time:
+      - seconds: 0
+        minutes: 0
+        hours: 0
+        then:
+           - switch.toggle: restart_switch
+
+# Pulse counter to count LED flashes. 1000 pulses / 60 seconds (1 min) = 1 kW
+# Therefore, to get a realtime measurement, the filter becomes 60 / 1000 = 0.06
+sensor:
+  - platform: pulse_counter
+    internal_filter: 10us
+    pin: D5
+    unit_of_measurement: 'kW'
+    name: 'Power Meter'
+    filters:
+      - multiply: 0.06
+
+# Manual restart button for HomeAssistant UI
+switch:
+  - platform: restart
+    name: 'Power Monitor REBOOT'
+    id: restart_switch

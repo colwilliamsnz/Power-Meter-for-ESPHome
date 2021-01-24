@@ -1,0 +1,5 @@
+- platform: integration
+  source: sensor.power_meter
+  name: energy_spent
+  method: left
+  round: 2
