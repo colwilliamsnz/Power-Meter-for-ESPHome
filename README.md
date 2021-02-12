@@ -1,5 +1,7 @@
 # Non-intrusive Power Meter for ESPHome and Home Assistant
-A simple non-intrusive circuit for measuring power consumption and reporting back to Home Assistant. Many homes these days have "smart" power meters that provide a means of non-invasive integration by counting the pulses from an indicator LED.
+A super simple non-intrusive circuit for measuring power consumption and reporting back to Home Assistant.
+
+Many homes these days have "smart" power meters that provide a means of non-invasive integration by counting the pulses from an indicator LED.
 
 My homes smart meter, an EDMI MK7C (a common model used here in New Zealand), flashes 1000 times for every kilowatt consumed. By counting the pulses that occur in a 60 second window it is easy to obtain real time power consumption.
 
@@ -7,10 +9,10 @@ My homes smart meter, an EDMI MK7C (a common model used here in New Zealand), fl
 
 Power data is fed to a Home Assistant "integration" sensor to calculate hourly, daily, and weekly power consumption data for display within a Home Assistant dashboard.
 
-![Dashboard](Images/Dashboard.jpg)
+![Dashboard](Images/dashboard.jpg)
 
 ## Circuit
-The circuit is super simple, being based on an inexpensive Light Dependant Resistor (LDR) and a CMOS 74HC14 hex inverting schmitt trigger. The schmitt trigger buffers the signal from the LDR such that it can drive a GPIO input on an ESP8266. An LED is included to pulse in unison with the smart meter so that the LDR can be correctly positioned over top of the smart meters pulse LED.
+The circuit is super simple, being based on an inexpensive Light Dependant Resistor (LDR) and a CMOS 74HC14 hex inverting schmitt trigger. The schmitt trigger buffers the signal from the LDR such that it can drive a GPIO input on a Wemos D1 Mini, as well as drive an LED that pulses in unison with the smart meter (useful for ensuring the LDR is correctly positioned over top of the smart meters pulse LED).
 
 ![Circuit](Images/circuit.png)
 

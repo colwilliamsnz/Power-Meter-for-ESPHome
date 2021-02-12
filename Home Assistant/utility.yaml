@@ -1,3 +1,5 @@
+# Home Assistant code snippet. Add to your configuration.yaml file
+
 utility_meter:
   energy_used_hourly:
     source: sensor.energy_spent
